@@ -21,52 +21,27 @@ public class ListNode {
 
 class Solution {
     static func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        guard let start1 = l1 else{
-            if l2 != nil{
-                return l2
-            }
-            return nil
-        }
-        guard let start2 = l2 else{
-            return start1
-        }
+        var dummy = ListNode(0)
+        var head1 = l1
+        var head2 = l2
+        var currentNode = dummy
         var carry = 0
-        var head1:ListNode? = start1
-        var head2:ListNode? = start2
-        var lastNode:ListNode? = nil
-        let sum1 = head1!.val+head2!.val+carry
-        if ((sum1/10) != 0){
-                carry = 1
-        }else{
-                carry = 0
-        }
-        let node1 = ListNode(sum1%10, lastNode)
-        lastNode = node1
-        repeat{
-            head1 = head1!.next
-            head2 = head2!.next
-            if (head1==nil && head2==nil){
-                break
-            }
-            if (head1==nil){
-                lastNode = head2
-                break
-            }
-            if head2==nil{
-                lastNode = head1
-                break
-            }
-            let sum = head1!.val+head2!.val+carry
-            if ((sum/10) != 0){
+        while(head1 !=  nil || head2 != nil || carry != 0){
+            let val1 = (head1 != nil) ? head1!.val : 0
+            let val2 = (head2 != nil) ? head2!.val : 0
+            let sum = val1 + val2 + carry
+            if(sum/10 != 0){
                 carry = 1
             }else{
                 carry = 0
             }
-            let node = ListNode(sum%10, lastNode)
-            lastNode = node
-        }while(head1!.next != nil || head2!.next != nil)
-        
-        return lastNode
+            let node = ListNode(sum%10)
+            currentNode.next = node
+            currentNode = node
+            if (head1 != nil) {head1=head1!.next}
+            if (head2 != nil) {head2=head2!.next}
+        }
+        return dummy.next
     }
 }
 
