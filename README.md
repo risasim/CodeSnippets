@@ -6,3 +6,9 @@ Are snippets that are connected to UT or are based on something we are doing at 
 
 ## Leetcode
 Problems solved in leetcode moved here.
+
+|Problem   |  Diffuclty for me|
+|---|---|
+|2 Add two number   | hard  |
+|9 Palindrome number   | easy  |
+|   |   |
