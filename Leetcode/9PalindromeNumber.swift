@@ -1,5 +1,7 @@
+//Given an integer x, return true if x is a palindrome, and false otherwise.
+
 class Solution {
-    func isPalindrome(_ x: Int) -> Bool {
+    static func isPalindrome(_ x: Int) -> Bool {
         let stringifiedInt = String(x)
         let stringArr = Array(stringifiedInt)
         var head = 0
@@ -14,3 +16,8 @@ class Solution {
         return true
     }
 }
+
+print(Solution.isPalindrome(0))
+print(Solution.isPalindrome(123))
+print(Solution.isPalindrome(1554551))
+print(Solution.isPalindrome(1331))
