@@ -21,10 +21,8 @@ class Solution {
                 if occurenceCounter < 2{
                     occurenceCounter+=1
                     lastUniqueElement+=1
-                     nums[lastUniqueElement] = nums[i]
-                    print("occurences increased \(occurenceCounter)")
+                    nums[lastUniqueElement] = nums[i]
                 }
-                print("occurences \(occurenceCounter)")
             }
             i+=1
         }
