@@ -18,7 +18,6 @@ class Solution {
             return BFS(node, 1)
         }
         return 0
-        
     }
 
     func BFS(_ node:TreeNode?, _ level:Int) -> Int{
@@ -32,7 +31,6 @@ class Solution {
         }else{
             let left = BFS(node!.left, level+1)
             let right = BFS(node!.right, level+1)
-            //print(" \(left) vs \(right)")
             return left>right ? left : right
         }
     }
