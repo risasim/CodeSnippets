@@ -17,6 +17,7 @@ class Solution {
             var leftPointer = i-1
             var rightPointer = i+1
             var stopLoop = false
+            var sameChar = true
 
             while !stopLoop{
                 if longestPal.count==s.count{
@@ -31,6 +32,9 @@ class Solution {
                 }
 
                 if leftCharacter==rightCharacter{
+                    if leftCharacter != strAsArray[i]{
+                        sameChar = false
+                    }
                     currentPalindrome = "\(strAsArray[leftPointer])"+currentPalindrome+"\(strAsArray[rightPointer])"
                     updatePalindrome(currentPalindrome)
                     rightPointer+=1
@@ -39,18 +43,22 @@ class Solution {
                 }
 
                 var change = false
-                if leftCharacter != "" && checkPalindrome(leftCharacter + currentPalindrome){
-                    currentPalindrome = leftCharacter+currentPalindrome
-                    updatePalindrome(currentPalindrome)
-                    leftPointer-=1
-                    change = true
+                if leftCharacter != "" && sameChar{
+                    if leftCharacter == strAsArray[i]{
+                        currentPalindrome = leftCharacter+currentPalindrome
+                        updatePalindrome(currentPalindrome)
+                        leftPointer-=1
+                        change = true   
+                    }
                 }
 
-                if rightCharacter != "" && checkPalindrome(currentPalindrome+rightCharacter){
-                    currentPalindrome = currentPalindrome+rightCharacter
-                    updatePalindrome(currentPalindrome)
-                    rightPointer+=1
-                    change = true
+                if rightCharacter != "" && sameChar{
+                    if rightCharacter == strAsArray[i]{
+                        currentPalindrome = currentPalindrome+rightCharacter
+                        updatePalindrome(currentPalindrome)
+                        rightPointer+=1
+                        change = true   
+                    }
                 }
 
                 if !change{
@@ -59,20 +67,6 @@ class Solution {
             }
         }
         return longestPal
-    }
-
-   func checkPalindrome(_ potential: String) -> Bool {
-    let arr = Array(potential)
-    var head = 0
-    var tail = arr.count - 1
-        while head < tail {
-            if arr[head] != arr[tail] {
-                return false
-            }
-            head += 1
-            tail -= 1
-        }
-    return true
     }
 
     func checkIndexes(_ arr:[String], _ index:Int) -> String?{
