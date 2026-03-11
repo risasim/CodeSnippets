@@ -1,107 +1,58 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+import Foundation
 
-//Given a string s, return the longest palindromic substring in s.
 
 class Solution {
-    var longestPal = ""
-    
-    //Brute force
-    func longestPalindrome(_ s: String) -> String {
-        let strAsArray = s.map({String($0)})
-        longestPal = strAsArray[0]
+    func bitwiseComplement(_ n: Int) -> Int {
+        var binaryStr = Array(Solution.intToBinary(n))
 
-        // for every letter have two pointers to the start and end of palindrome and then add either until you no longer can due to size or if addition of both/left/right with according pointer, does not yield palindrome
-        for i in 0..<strAsArray.count{
-            var currentPalindrome = "\(strAsArray[i])"
-            var leftPointer = i-1
-            var rightPointer = i+1
-            var stopLoop = false
-            var sameChar = true
-
-            while !stopLoop{
-                if longestPal.count==s.count{
-                    break
-                }
-
-                let leftCharacter = checkIndexes(strAsArray, leftPointer) ?? ""
-                let rightCharacter = checkIndexes(strAsArray, rightPointer) ?? ""
-                if leftCharacter=="" && ""==rightCharacter{
-                    stopLoop = true
-                    break 
-                }
-
-                if leftCharacter==rightCharacter{
-                    if leftCharacter != strAsArray[i]{
-                        sameChar = false
-                    }
-                    currentPalindrome = "\(strAsArray[leftPointer])"+currentPalindrome+"\(strAsArray[rightPointer])"
-                    updatePalindrome(currentPalindrome)
-                    rightPointer+=1
-                    leftPointer-=1
-                    continue
-                }
-
-                var change = false
-                if leftCharacter != "" && sameChar{
-                    if leftCharacter == strAsArray[i]{
-                        currentPalindrome = leftCharacter+currentPalindrome
-                        updatePalindrome(currentPalindrome)
-                        leftPointer-=1
-                        change = true   
-                    }
-                }
-
-                if rightCharacter != "" && sameChar{
-                    if rightCharacter == strAsArray[i]{
-                        currentPalindrome = currentPalindrome+rightCharacter
-                        updatePalindrome(currentPalindrome)
-                        rightPointer+=1
-                        change = true   
-                    }
-                }
-
-                if !change{
-                    stopLoop=true
-                }
+        for i in 0..<binaryStr.count{
+            if binaryStr[i]=="0"{
+                binaryStr[i]="1"
+            }else{
+                binaryStr[i]="0"
             }
         }
-        return longestPal
+        return Solution.binaryToInt(String(binaryStr))
+
     }
 
-    func checkIndexes(_ arr:[String], _ index:Int) -> String?{
-        if index<0 || index>=arr.count{
-            return nil
-        }else{
-            return arr[index]
+    static func intToBinary(_ n:Int)-> String{
+        if n == 0{
+            return "0"
         }
-    }
-
-    func updatePalindrome(_ curr:String){
-        if curr.count>longestPal.count{
-            //print("updating \(curr) instead of \(longestPal)")
-            longestPal=curr
-        }
-    }
-
-    func checkSameChars(_ s:String)->String?{
-        let strAsArray = s.map({String($0)})
-        let base = strAsArray[0]
-        for char in strAsArray{
-            if char != base{
-                return nil
+        var remainder = n%2
+        var rest = Int(n/2)
+        var str = ""
+        repeat{
+            if remainder==1{
+                str = "1"+str
+            }else{
+                str="0"+str
             }
+            remainder = rest%2
+            rest = Int(rest/2)
+        }while rest != 0 || remainder != 0
+        return str
+    }
+
+    static func binaryToInt(_ s: String) -> Int {
+        let chars = Array(s)  
+        var n = 0
+        for i in (0..<chars.count).reversed() {
+            let bit = Int(String(chars[i])) ?? 0 
+            let place = chars.count - 1 - i 
+            n += bit * Int(pow(2.0, Double(place))) 
         }
-        return base
+        return n  
     }
 }
 
-print(Solution().longestPalindrome("babad"))
-print(Solution().longestPalindrome("aacabdkacaa"))
 
-print(Solution().longestPalindrome("tattarrattat"))
+print(Solution.binaryToInt("101"))
 
- print(Solution().longestPalindrome("a"))
- print(Solution().longestPalindrome("aba"))
- print(Solution().longestPalindrome("abb"))
+print(Solution.intToBinary(3))
+
+
+
+
 
