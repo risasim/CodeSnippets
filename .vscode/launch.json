@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:CodeSnippets}/TestingPackage",
+            "name": "Debug TestingPackage (TestingPackage)",
+            "target": "TestingPackage",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug TestingPackage (TestingPackage)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:CodeSnippets}/TestingPackage",
+            "name": "Release TestingPackage (TestingPackage)",
+            "target": "TestingPackage",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release TestingPackage (TestingPackage)"
+        }
+    ]
+}
