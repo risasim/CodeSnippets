@@ -1,4 +1,6 @@
-  public class TreeNode {
+// 104. Maximum depth of BT ~ easy  
+  
+public class TreeNode {
     public var val: Int
     public var left: TreeNode?
     public var right: TreeNode?

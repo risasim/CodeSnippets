@@ -1,3 +1,6 @@
+// 1200. Minimal Abosolute difference in array ~ easy
+
+
 class Solution {
      func minimumAbsDifference(_ arr: [Int]) -> [[Int]] {
         var lowest:Int? = nil 

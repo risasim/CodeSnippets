@@ -1,3 +1,5 @@
+// 3637 Trionic array ~ medium
+
 class Solution {
     func isTrionic(_ nums: [Int]) -> Bool {
         var inc1Ended = false

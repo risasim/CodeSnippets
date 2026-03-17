@@ -1,3 +1,5 @@
+  // 11. Minimal depth of BT ~ easy
+  
   public class TreeNode {
     public var val: Int
     public var left: TreeNode?
