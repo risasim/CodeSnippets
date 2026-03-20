@@ -4,7 +4,7 @@ import Foundation
 private let directory = "Leetcode"
 private let README = "README.md"
 private let regex = try NSRegularExpression(
-    pattern: #"([^~]+)~\s*(easy|medium|hard)"#,
+    pattern: #"//\s*([^~]+?)~\s*(easy|medium|hard)"#,
     options: .caseInsensitive
 )
 func updateReadme(){
@@ -18,8 +18,8 @@ func updateReadme(){
 
     let rows = toBeWritten.map { "| \($0.name) | \($0.level)" }
     let table = """
-    | Name | Difficulty | File |
-    |------|------------|------|
+    | Name | Difficulty |
+    |------|------------|
     \(rows.joined(separator: "\n"))
     """
 
