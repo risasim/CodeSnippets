@@ -71,7 +71,10 @@ private func getData(_ fileManager:FileManager, _ targetFolder:URL)->[(name:Stri
             guard lines.count>0 else {continue}
 
             let range =  NSRange(lines[0].startIndex..., in: lines[0])
-            guard let match = regex.firstMatch(in: String(lines[0]), range: range) else { continue }
+            guard let match = regex.firstMatch(in: String(lines[0]), range: range) else { 
+                print("We have a naughty file \(fileURL.absoluteString)")
+                continue 
+            }
             guard  
                 let nameRange = Range(match.range(at: 1), in: lines[0]),
                 let levelRange = Range(match.range(at: 2), in: lines[0]) else {continue}

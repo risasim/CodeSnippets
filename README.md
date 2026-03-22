@@ -13,6 +13,7 @@ Problems solved in leetcode moved here.
 | 66. Plus one num stored in array | Easy
 | 5. Longest Palindromic Substring | Medium
 | 11. Minimal depth of BT | Easy
+| 1886 Rotate Matrix | Easy
 | 80. Remove Duplicate from sorted array | Easy
 | 3190 Operations to be divisible by three | Easy
 | 9. Palindrome number | Easy
