@@ -4,7 +4,7 @@ import Foundation
 private let directory = "Leetcode"
 private let README = "README.md"
 private let regex = try NSRegularExpression(
-    pattern: #"//\s*([^~]+?)~\s*(easy|medium|hard)"#,
+    pattern: #"//\s*([0-9]+)*(?:[.])*([^~]+?)~\s*(easy|medium|hard)"#,
     options: .caseInsensitive
 )
 func updateReadme(){
@@ -13,10 +13,10 @@ func updateReadme(){
     let targetFolder = URL(fileURLWithPath: fileManager.currentDirectoryPath).appendingPathComponent(directory, isDirectory: true)
     print("Scanning: \(targetFolder.path)")
 
-    let toBeWritten:[(name:String, level:String)] = getData(fileManager, targetFolder)
+    let toBeWritten:[(number:Int,name:String, level:String)] = getData(fileManager, targetFolder).sorted(by: {$0.number < $1.number})
 
 
-    let rows = toBeWritten.map { "| \($0.name) | \($0.level)" }
+    let rows = toBeWritten.map { "| \($0.number) \($0.name) | \($0.level)" }
     let table = """
     | Name | Difficulty |
     |------|------------|
@@ -58,8 +58,8 @@ func updateReadme(){
 }
 
 
-private func getData(_ fileManager:FileManager, _ targetFolder:URL)->[(name:String, level:String)]{
-    var toBeWritten:[(name:String, level:String)] = []
+private func getData(_ fileManager:FileManager, _ targetFolder:URL)->[(number:Int,name:String, level:String)]{
+    var toBeWritten:[(number:Int,name:String, level:String)] = []
     do{
         let itemsURLs = try fileManager.contentsOfDirectory(at: targetFolder, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles)
 
@@ -75,14 +75,19 @@ private func getData(_ fileManager:FileManager, _ targetFolder:URL)->[(name:Stri
                 print("We have a naughty file \(fileURL.absoluteString)")
                 continue 
             }
-            guard  
-                let nameRange = Range(match.range(at: 1), in: lines[0]),
-                let levelRange = Range(match.range(at: 2), in: lines[0]) else {continue}
+            guard
+                let numberRange = Range(match.range(at: 1), in: lines[0]),
+                let nameRange = Range(match.range(at: 2), in: lines[0]),
+                let levelRange = Range(match.range(at: 3), in: lines[0]) else {continue}
             
+            guard let number = Int(lines[0][numberRange]) else{
+                 print("File is missing a number \(fileURL.absoluteString)")
+                continue
+            }
             let name = lines[0][nameRange].trimmingCharacters(in: .whitespaces)
             let level = lines[0][levelRange].capitalized
 
-            toBeWritten.append((name, level))
+            toBeWritten.append((number, name, level))
 
         }
     }catch{
