@@ -48,5 +48,5 @@ class RSA{
 
 
 
-print(RSA.crack(91,11,3))
-print(RSA.crack(55,3,9))
+print(RSA.crack(51,7,3))
+//print(RSA.crack(55,3,9))

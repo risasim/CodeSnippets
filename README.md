@@ -16,6 +16,7 @@ Problems solved in leetcode moved here.
 | 5 Longest Palindromic Substring | Medium
 | 9 Palindrome number | Easy
 | 11 Minimal depth of BT | Easy
+| 13 Roman integer | Medium
 | 26 Remove from sorted array | Easy
 | 66 Plus one num stored in array | Easy
 | 80 Remove Duplicate from sorted array | Easy
