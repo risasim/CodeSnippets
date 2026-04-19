@@ -27,19 +27,22 @@ class Solution {
         if encodedText == ""{
             return ""
         }
+        if rows == 1{
+            return encodedText
+        }
         let numOfTheOtherRows = (encodedText.count/rows)
         var stringArray = encodedText.components(withMaxLength: numOfTheOtherRows)
         print(stringArray)
-        var longest = 0
-        for str in stringArray{
-            let trimCount = str.trimmingCharacters(in: .whitespaces).count
-            if trimCount>longest{
-                longest = trimCount
-            }
-        }
+        // var longest = 0
+        // for str in stringArray{
+        //     let trimCount = str.trimmingCharacters(in: .whitespaces).count
+        //     if trimCount>longest{
+        //         longest = trimCount
+        //     }
+        // }
         var added = true
         var finalText = ""
-        for j in 0..<longest{
+        for j in 0..<numOfTheOtherRows{
             for i in 0..<rows{
                 if i+j>=stringArray[0].count{
                     break
