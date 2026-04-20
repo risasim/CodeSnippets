@@ -2,27 +2,6 @@
 import Foundation
 
 class Solution {
-    func originalDecodeCiphertext(_ encodedText: String, _ rows: Int) -> String {
-        let numOfChars = rows-1
-        var stringArray = encodedText.components(separatedBy: "   ")
-        print(stringArray)
-        var added = true
-        var finalText = ""
-        while added{
-            added = false
-
-            for i in 0..<stringArray.count{
-                if stringArray[i].count==0{
-                    continue
-                }
-                finalText += String(stringArray[i].first!)
-                stringArray[i].remove(at: stringArray[i].startIndex)
-                added = true
-            }
-        } 
-        return finalText
-    }
-
     func decodeCiphertext(_ encodedText: String, _ rows: Int) -> String {
         if encodedText == ""{
             return ""
@@ -32,26 +11,20 @@ class Solution {
         }
         let numOfTheOtherRows = (encodedText.count/rows)
         var stringArray = encodedText.components(withMaxLength: numOfTheOtherRows)
-        print(stringArray)
-        // var longest = 0
-        // for str in stringArray{
-        //     let trimCount = str.trimmingCharacters(in: .whitespaces).count
-        //     if trimCount>longest{
-        //         longest = trimCount
-        //     }
-        // }
         var added = true
         var finalText = ""
         for j in 0..<numOfTheOtherRows{
             for i in 0..<rows{
                 if i+j>=stringArray[0].count{
-                    break
+                    return finalText.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
                 }
                 finalText += stringArray[i][i+j]
             }
         }
         return finalText.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
     }
+
+    
 }
 
 extension String {
